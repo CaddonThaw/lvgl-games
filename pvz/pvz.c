@@ -1154,7 +1154,33 @@ static void game_over_cb(void)
 static void game_over_img_ready_cb(lv_anim_t *a)
 {
     exit_game_cb(0);
-    pvz_start();
+
+    lv_memset_00(zb_matrix, sizeof(zb_matrix));
+    lv_memset_00(map_flag, sizeof(map_flag));
+    lv_memset_00(wogua, sizeof(wogua));
+    lv_memset_00(add_zidan_timer, sizeof(add_zidan_timer));
+    lv_memset_00(sunflower, sizeof(sunflower));
+    lv_memset_00(wandouflower, sizeof(wandouflower));
+    lv_memset_00(jiguangdou, sizeof(jiguangdou));
+    lv_memset_00(shine, sizeof(shine));
+    lv_memset_00(zidan, sizeof(zidan));
+    lv_memset_00(little_car, sizeof(little_car));
+
+    lv_obj_set_size(screen, PVZ_SCREEN_W, PVZ_SCREEN_H);
+    lv_obj_center(screen);
+    lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
+    map1 = lv_img_create(screen);
+    lv_obj_set_size(map1, PVZ_SCREEN_W, PVZ_SCREEN_H);
+    lv_obj_center(map1);
+    lv_img_set_src(map1, &pvz_map_3);
+    lv_obj_clear_flag(map1, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_add_event_cb(map1, map_click_cb, LV_EVENT_RELEASED, 0);
+
+    start_btn = lv_img_create(map1);
+    lv_img_set_src(start_btn, &start_game_img);
+    lv_obj_center(start_btn);
+    lv_obj_add_flag(start_btn, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(start_btn, game_start, LV_EVENT_RELEASED, 0);
 }
 
 static void car_start_move(void *var, int32_t v)
@@ -1891,5 +1917,5 @@ static void exit_game_cb(lv_event_t *e)
     lv_timer_del(timer_zidan_refr_pos);
     lv_timer_del(timer_car_test);
     init_all();
-    lv_obj_del(screen);
+    lv_obj_clean(screen);
 }

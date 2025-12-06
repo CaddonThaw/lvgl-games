@@ -457,7 +457,30 @@ static void move_done_cb(lv_anim_t *a)
 
 static void game_over()
 {
-    // lv_anim_del_all();
-    lv_obj_del(screen);
-    yang_game();
+    lv_obj_clean(screen);
+
+    lv_memset_00(left_card, sizeof(left_card));
+    lv_memset_00(right_card, sizeof(right_card));
+    lv_memset_00(mid_card, sizeof(mid_card));
+    lv_memset_00(bottom_card, sizeof(bottom_card));
+    
+    lv_obj_set_size(screen, 320, 240);
+    lv_obj_set_style_bg_color(screen, lv_color_hex(0xcdfd8b), 0);
+    lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
+
+    for (int i = 0; i < 12; i++) {
+        lv_obj_t *g = lv_img_create(screen);
+        lv_img_set_src(g, grass_img[rand() % 2]);
+        lv_obj_set_pos(g, rand() % 300, rand() % 220);
+    }
+
+    dock = lv_img_create(screen);
+    lv_img_set_src(dock, &bottom_dock_img);
+    lv_obj_align(dock, LV_ALIGN_BOTTOM_MID, 0, -5);
+
+    start_btn = lv_img_create(screen);
+    lv_img_set_src(start_btn, &yang_start_btn_img);
+    lv_obj_center(start_btn);
+    lv_obj_add_flag(start_btn, LV_OBJ_FLAG_CLICKABLE);
+    lv_obj_add_event_cb(start_btn, game_start, LV_EVENT_RELEASED, 0);
 }
