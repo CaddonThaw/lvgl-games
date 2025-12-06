@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-void xiaoxiaole(void);
+void xiaoxiaole(lv_obj_t *obj);
 
 #ifdef __cplusplus
 } /*extern "C"*/

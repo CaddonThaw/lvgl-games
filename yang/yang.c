@@ -104,9 +104,7 @@ static void card_anim_cb(void *var, int32_t v);
 static void card_del_cb(lv_anim_t *a);
 static void right_x_move_cb(void *var, int32_t v);
 
-bool game_yang_flag = 0;
-
-void yang_game(void)
+void yang_game(lv_obj_t *obj)
 {
 #if LVGL_VERSION_MAJOR == 9
     memset(left_card, 0, sizeof(left_card));
@@ -120,7 +118,7 @@ void yang_game(void)
     lv_memset_00(bottom_card, sizeof(bottom_card));
 #endif
     
-    screen = lv_tileview_create(ui_GameSon);
+    screen = lv_tileview_create(obj);
     lv_obj_set_size(screen, 320, 240);
     lv_obj_set_style_bg_color(screen, lv_color_hex(0xcdfd8b), 0);
     lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
@@ -140,8 +138,6 @@ void yang_game(void)
     lv_obj_center(start_btn);
     lv_obj_add_flag(start_btn, LV_OBJ_FLAG_CLICKABLE);
     lv_obj_add_event_cb(start_btn, game_start, LV_EVENT_RELEASED, 0);
-
-    ui_gameson_init();
 }
 
 static void game_start(lv_event_t *e)

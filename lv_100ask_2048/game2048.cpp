@@ -2,8 +2,6 @@
 #include "lv_100ask_2048.h"
 #include "../lv_games.h"
 
-bool game_2048_flag = 0;
-
 static void game_2048_event_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -28,19 +26,19 @@ static void new_game_btn_event_handler(lv_event_t * e)
 }
 
 
-void lv_100ask_2048_simple_test(void)
+void lv_100ask_2048_simple_test(lv_obj_t *obj)
 {
     /*Create 2048 game*/
-    lv_obj_t * obj_2048 = lv_100ask_2048_create(ui_GameSon);
+    lv_obj_t * obj_2048 = lv_100ask_2048_create(obj);
 #if LV_FONT_MONTSERRAT_40    
     lv_obj_set_style_text_font(obj_2048, &lv_font_montserrat_40, 0);
 #endif
     lv_obj_set_size(obj_2048, 200, 200);
     lv_obj_center(obj_2048);
-    lv_obj_align_to(obj_2048, ui_GameSon, LV_ALIGN_CENTER, 0, 10);
+    lv_obj_align_to(obj_2048, obj, LV_ALIGN_CENTER, 0, 10);
 
     /*Information*/
-    lv_obj_t * label = lv_label_create(ui_GameSon);
+    lv_obj_t * label = lv_label_create(obj);
     lv_label_set_recolor(label, true); 
     lv_label_set_text_fmt(label, "SCORE: #ff00ff %d #", lv_100ask_2048_get_score(obj_2048));
     lv_obj_align_to(label, obj_2048, LV_ALIGN_OUT_TOP_RIGHT, 0, -5);
@@ -48,7 +46,7 @@ void lv_100ask_2048_simple_test(void)
     lv_obj_add_event_cb(obj_2048, game_2048_event_cb, LV_EVENT_ALL, label);
 
     /*New Game*/
-    lv_obj_t * btn = lv_btn_create(ui_GameSon);
+    lv_obj_t * btn = lv_btn_create(obj);
     lv_obj_align_to(btn, obj_2048, LV_ALIGN_OUT_TOP_LEFT, 0, -10);
     lv_obj_set_size(btn,80,20);
     lv_obj_add_event_cb(btn, new_game_btn_event_handler, LV_EVENT_CLICKED, obj_2048);
@@ -56,7 +54,5 @@ void lv_100ask_2048_simple_test(void)
     label = lv_label_create(btn);
     lv_label_set_text(label, "New Game");
     lv_obj_center(label);
-
-    ui_gameson_init();
 }
 

@@ -12,15 +12,16 @@ extern "C" {
 #endif
 
 #include "lvgl.h"
-#include <ui/src/ui.h>
 
 #include "lv_100ask_2048/game2048.h"
 #include "yang/yang.h"
 #include "xiaoxiaole/xiaoxiaole.h"
 #include "pvz/pvz.h"
 
-void ui_gameson_init(void);
-void ui_gameson_clear(void);
+#define game2048_update(x) lv_100ask_2048_simple_test(x)
+#define yang_update() yang_game()
+#define xiaoxiaole_update(x) xiaoxiaole(x)
+#define pvz_update(x) pvz_start(x)
 
 #ifdef __cplusplus
 } /* extern "C" */

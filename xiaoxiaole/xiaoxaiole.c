@@ -2,7 +2,6 @@
 #include "stdlib.h"
 #include "xiaoxiaole.h"
 #include "../lv_games.h"
-#include <ui/src/ui.h>
 
 // 整体的宽度
 #define XXL_SIZE_W  440
@@ -74,9 +73,7 @@ LV_IMG_DECLARE(refs_btn_img)
 LV_IMG_DECLARE(exit_img)
 LV_IMG_DECLARE(coin_img)
 
-bool game_xiaole_flag = 0;
-
-void xiaoxiaole(void)
+void xiaoxiaole(lv_obj_t *obj)
 {
     if (lv_disp_get_hor_res(lv_disp_get_default()) >= lv_disp_get_ver_res(lv_disp_get_default())) {
         screen_ratio = (float)lv_disp_get_ver_res(lv_disp_get_default()) / 480;
@@ -84,9 +81,9 @@ void xiaoxiaole(void)
         screen_ratio = (float)lv_disp_get_hor_res(lv_disp_get_default()) / 480;
     }
 
-    lv_obj_clear_flag(ui_GameSon, LV_OBJ_FLAG_SCROLLABLE);
+    lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
 
-    screen1 = lv_tileview_create(ui_GameSon);
+    screen1 = lv_tileview_create(obj);
     lv_obj_set_style_bg_color(screen1, lv_color_hex(0x000000), LV_PART_MAIN);
     lv_obj_clear_flag(screen1, LV_OBJ_FLAG_SCROLLABLE);
 
@@ -139,8 +136,6 @@ void xiaoxiaole(void)
     lv_obj_set_style_text_color(score_lable, lv_color_hex(0x00695C), LV_PART_MAIN);
 
     game_init();
-
-    ui_gameson_init();
 }
 
 static void game_init()

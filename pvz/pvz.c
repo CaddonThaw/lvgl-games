@@ -3,8 +3,6 @@
 #include "pvz.h"
 #include "../lv_games.h"
 
-bool game_pvz_flag = 0;
-
 #define max_zb_count             30  
 #define max_quantity             15  
 #define zb_period                4000 
@@ -332,7 +330,7 @@ static card_btn_type card_btn[] = {
 
 };
 
-void pvz_start(void)
+void pvz_start(lv_obj_t *obj)
 {
 #if LVGL_VERSION_MAJOR == 9
     memset(zb_matrix, 0, sizeof(zb_matrix));
@@ -357,7 +355,7 @@ void pvz_start(void)
     lv_memset_00(zidan, sizeof(zidan));
     lv_memset_00(little_car, sizeof(little_car));
 #endif
-    screen = lv_tileview_create(ui_GameSon);
+    screen = lv_tileview_create(obj);
     lv_obj_set_size(screen, PVZ_SCREEN_W, PVZ_SCREEN_H);
     lv_obj_center(screen);
     lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE);
@@ -373,8 +371,6 @@ void pvz_start(void)
     lv_obj_center(start_btn);
     lv_obj_add_flag(start_btn, LV_OBJ_FLAG_CLICKABLE);
     lv_obj_add_event_cb(start_btn, game_start, LV_EVENT_RELEASED, 0);
-
-    ui_gameson_init();
 }
 
 static void game_start(lv_event_t *e)

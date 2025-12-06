@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-void lv_100ask_2048_simple_test(void);
+void lv_100ask_2048_simple_test(lv_obj_t *obj);
 
 #ifdef __cplusplus
 } /*extern "C"*/
