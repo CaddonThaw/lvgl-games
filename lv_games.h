@@ -1,9 +1,3 @@
-/**
- * @file lv_games.h
- * @souce https://gitee.com/mgod_wu/AiPi-Eyes-Rx
- * @souce https://gitee.com/mgod_wu/AiPi-Eyes-Rx
- */
-
 #ifndef LV_GAMES_H
 #define LV_GAMES_H
 
