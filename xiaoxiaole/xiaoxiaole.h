@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#include "lvgl.h"
+
 void xiaoxiaole(lv_obj_t *obj);
 
 #ifdef __cplusplus

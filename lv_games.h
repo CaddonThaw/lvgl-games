@@ -19,7 +19,7 @@ extern "C" {
 #include "pvz/pvz.h"
 
 #define game2048_update(x) lv_100ask_2048_simple_test(x)
-#define yang_update() yang_game()
+#define yang_update(x) yang_game(x)
 #define xiaoxiaole_update(x) xiaoxiaole(x)
 #define pvz_update(x) pvz_start(x)
 

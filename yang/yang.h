@@ -5,7 +5,9 @@
 extern "C" {
 #endif
 
-void yang_game(void);
+#include "lvgl.h"
+
+void yang_game(lv_obj_t *obj);
 
 #ifdef __cplusplus
 } /*extern "C"*/
